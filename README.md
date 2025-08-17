@@ -1,67 +1,139 @@
-# goit-js-hw-01
+# goit-js-hw-06
+
+Задача 1. Акаунт користувача
 
 Виконуй це завдання у файлі task-1.js
-Станція з продажу ремонтних дроїдів готова до запуску, залишилося написати програмне забезпечення для відділу продажів.
-Оголоси функцію makeTransaction, яка очікує два параметри, значення яких будуть задаватися під час її виклику: • quantity— перший параметр, число, що містить кількість замовлених дроїдів • pricePerDroid — другий параметр, число, що містить вартість одного дроїда
 
-Доповни код функції так, щоб вона повертала рядок з повідомленням про покупку ремонтних дроїдів: "You ordered <quantity> droids worth <totalPrice> credits!", де: • <quantity> — це кількість замовлених дроїдів • <totalPrice> — це загальна вартість замовлення, тобто вартість усіх замовлених дроїдів
+Перед звільненням розробник зламав вихідний код управління акаунтами
+користувачів нашого сервісу доставки їжі. Виконай рефакторинг методів об'єкта
+customer, розставивши відсутні this під час звернення до властивостей об'єкта.
 
-Візьми код нижче і встав після оголошення своєї функції для перевірки коректності її роботи. У консоль будуть виведені результати її роботи.
+Використай цей стартовий код і виконай рефакторинг. Після оголошення об'єкта ми
+додали виклики методів. У консоль будуть виведені результати їх роботи. Будь
+ласка, нічого там не змінюй.
 
-console.log(makeTransaction(5, 3000)); // "You ordered 5 droids worth 15000 credits!"
-console.log(makeTransaction(3, 1000)); // "You ordered 3 droids worth 3000 credits!"
-console.log(makeTransaction(10, 500)); // "You ordered 10 droids worth 5000 credits!"
+const customer = { username: "Mango", balance: 24000, discount: 0.1, orders:
+["Burger", "Pizza", "Salad"], // Change code below this line getBalance() {
+return balance; }, getDiscount() { return discount; }, setDiscount(value) {
+discount = value; }, getOrders() { return orders; }, addOrder(cost, order) {
+balance -= cost - cost \* discount; orders.push(order); }, // Change code above
+this line };
+
+customer.setDiscount(0.15); console.log(customer.getDiscount()); // 0.15
+customer.addOrder(5000, "Steak"); console.log(customer.getBalance()); // 19750
+console.log(customer.getOrders()); // ["Burger", "Pizza", "Salad", "Steak"]
+
+Залиш цей код для перевірки ментором.
 
 На що буде звертати увагу ментор при перевірці:
 
-Оголошена функція makeTransaction(quantity, pricePerDroid)
-Виклик makeTransaction(5, 3000) повертає "You ordered 5 droids worth 15000 credits!"
-Виклик makeTransaction(3, 1000) повертає "You ordered 3 droids worth 3000 credits!"
-Виклик makeTransaction(10, 500) повертає "You ordered 10 droids worth 5000 credits!"
-В консоль виведині всі результаті викликів
-Виклик makeTransaction з будь якими-валідними аргументами повертає правильне значення
+Оголошена змінна customer Значення змінної customer — це об'єкт із властивостями
+та методами Виклик customer.getDiscount() повертає поточне значення властивості
+discount Виклик customer.setDiscount(0.15) оновлює значення властивості discount
+Виклик customer.getBalance() повертає поточне значення властивості balance.
+Виклик customer.getOrders() повертає поточне значення властивості orders Виклик
+customer.addOrder(5000, "Steak") додає "Steak" у масив значень властивості
+orders та оновлює баланс Метод getBalance об'єкта customer використовує this
+Метод getDiscount об'єкта customer використовує this Метод setDiscount об'єкта
+customer використовує this Метод getOrders об'єкта customer використовує this
+Метод addOrder об'єкта customer використовує this
 
+Задача 2. Склад
 
-Задача 2. Доставка товару
 Виконуй це завдання у файлі task-2.js
 
-Оголоси функцію getShippingMessage, яка очікує три параметри, значення яких будуть задаватися під час її виклику: • country — перший параметр, рядок, що містить країну доставки • price — другий параметр, число, що містить загальну вартість товару • deliveryFee — третій параметр, число, що містить вартість доставки товару
+Створи клас Storage, який створюватиме об'єкти для управління складом товарів.
+Клас очікує лише один аргумент — початковий масив товарів, який записується до
+створеного об'єкта в приватну властивість items.
 
-Доповни код функції так, щоб вона повертала рядок з повідомленням про доставку товару в країну користувача: "Shipping to <country> will cost <totalPrice> credits", де: • <country> — це країни доставки • <totalPrice> — це загальна вартість замовлення, що включає вартість товару і його доставки
+Оголоси наступні методи класу:
 
-Візьми код нижче і встав після оголошення своєї функції для перевірки коректності її роботи. У консоль будуть виведені результати її роботи.
+getItems() — повертає масив поточних товарів у приватній властивості items.
+addItem(newItem) — приймає новий товар newItem і додає його до масиву товарів у
+приватну властивість items об'єкта. removeItem(itemToRemove) — приймає рядок з
+назвою товару itemToRemove і видаляє його з масиву товарів у приватній
+властивості items об'єкта.
 
-console.log(getShippingMessage("Australia", 120, 50)); // "Shipping to Australia will cost 170 credits"
-console.log(getShippingMessage("Germany", 80, 20)); // "Shipping to Germany will cost 100 credits"
-console.log(getShippingMessage("Sweden", 100, 20)); // "Shipping to Sweden will cost 120 credits"
+Візьми код нижче з ініціалізацією екземпляра й викликами методів і встав його
+після оголошення класу для перевірки коректності роботи. У консоль будуть
+виведені результати їх роботи. Будь ласка, нічого там не змінюй.
+
+const storage = new Storage(["Nanitoids", "Prolonger", "Antigravitator"]);
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
+
+storage.addItem("Droid"); console.log(storage.getItems()); // ["Nanitoids",
+"Prolonger", "Antigravitator", "Droid"]
+
+storage.removeItem("Prolonger"); console.log(storage.getItems()); //
+["Nanitoids", "Antigravitator", "Droid"]
+
+storage.removeItem("Scaner"); console.log(storage.getItems()); // ["Nanitoids",
+"Antigravitator", "Droid"]
+
+Залиш цей код для перевірки ментором.
 
 На що буде звертати увагу ментор при перевірці:
 
-Оголошена функція getShippingMessage(country, price, deliveryFee)
-Виклик getShippingMessage("Australia", 120, 50) повертає "Shipping to Australia will cost 170 credits"
-Виклик getShippingMessage("Germany", 80, 20) повертає "Shipping to Germany will cost 100 credits"
-Виклик getShippingMessage("Sweden", 100, 20) повертає "Shipping to Sweden will cost 120 credits"
-Виклик getShippingMessage з будь якими-валідними аргументами повертає правильне значення
+Оголошений клас Storage У класі Storage оголошений метод getItems У класі
+Storage оголошений метод addItem У класі Storage оголошений метод removeItem
+Властивість items у класі Storage оголошена приватною Метод getItems повертає
+значення приватної властивості items екземпляра класу, який його викликає Метод
+addItem змінює значення приватної властивості items екземпляра класу, який його
+викликає Метод removeItem змінює значення приватної властивості items екземпляра
+класу, який його викликає У результаті виклику new Storage(["Nanitoids",
+"Prolonger", "Antigravitator"]) значення змінної storage — це об'єкт У об’єкта
+storage немає публічної властивості items Перший виклик storage.getItems()
+одразу після ініціалізації екземпляра повертає масив ["Nanitoids", "Prolonger",
+"Antigravitator"] Другий виклик storage.getItems() після виклику
+storage.addItem("Droid") повертає масив ["Nanitoids", "Prolonger",
+"Antigravitator", "Droid"] Третій виклик storage.getItems() після виклику
+storage.removeItem("Prolonger") повертає масив ["Nanitoids", "Antigravitator",
+"Droid"] Четвертий виклик storage.getItems() після виклику
+storage.removeItem("Scaner") повертає масив ["Nanitoids", "Antigravitator",
+"Droid"]
 
+Задача 3. Конструктор рядків
 
-Задача 3. Ширина елемента
 Виконуй це завдання у файлі task-3.js
 
-Оголоси функцію getElementWidth, яка очікує три параметри, значення яких будуть задаватися під час її виклику: • content— перший параметр, ширина контенту • padding — другий параметр, значення горизонтального падінгу для кожної зі сторін • border — третій параметр, значення товщини бордера для кожної зі сторін Значення всіх параметрів будуть рядками формату Npx де N — це довільне число, ціле або дробове.
+Напиши клас StringBuilder, який приймає один параметр initialValue — довільний
+рядок, який записується у приватну властивість value об'єкта, що створюється.
 
-Доповни код функції так, щоб вона повертала число —загальну ширину елемента. При розрахунку загальної ширини орієнтуйся на те, що значення box-sizing дорівнює border-box.
+Оголоси наступні методи класу:
 
-Візьми код нижче і встав після оголошення своєї функції для перевірки коректності її роботи. У консоль будуть виведені результати її роботи.
+getValue() — повертає поточне значення приватної властивості value. padEnd(str)
+— отримує параметр str (рядок) і додає його в кінець значення приватної
+властивості value об'єкта, який викликає цей метод. padStart(str) — отримує
+параметр str (рядок) і додає його на початок значення приватної властивості
+value об'єкта, який викликає цей метод. padBoth(str) — отримує параметр str
+(рядок) і додає його на початок і в кінець значення приватної властивості value
+об'єкта, який викликає цей метод. Візьми код нижче з ініціалізацією екземпляра й
+викликами методів і встав його після оголошення класу для перевірки коректності
+роботи. У консоль будуть виведені результати їх роботи. Будь ласка, нічого там
+не змінюй.
 
-console.log(getElementWidth("50px", "8px", "4px")); // 74
-console.log(getElementWidth("60px", "12px", "8.5px")); // 101
-console.log(getElementWidth("200px", "0px", "0px")); // 200
+const builder = new StringBuilder("."); console.log(builder.getValue()); // "."
+builder.padStart("^"); console.log(builder.getValue()); // "^."
+builder.padEnd("^"); console.log(builder.getValue()); // "^.^"
+builder.padBoth("="); console.log(builder.getValue()); // "=^.^="
 
+Залиш цей код для перевірки ментором.
 
 На що буде звертати увагу ментор при перевірці:
 
-Оголошена функція getElementWidth(content, padding, border)
-Виклик getElementWidth("50px", "8px", "4px") повертає число 74
-Виклик getElementWidth("60px", "12px", "8.5px") повертає число 101
-Виклик getElementWidth("200px", "0px", "0px") повертає число 200
-Виклик getElementWidth з будь якими-валідними аргументами повертає правильне значення
+Оголошений клас StringBuilder Властивість value у класі StringBuilder оголошена
+приватною У класі StringBuilder оголошений метод getValue Метод getValue
+повертає значення приватної властивості value екземпляра класу, який його
+викликає У класі StringBuilder оголошений метод padEnd Метод padEnd змінює
+значення приватної властивості value екземпляра класу, який його викликає У
+класі StringBuilder оголошений метод padStart Метод padStart змінює приватну
+властивість value екземпляра класу, який його викликає У класі StringBuilder
+оголошений метод padBoth Метод padBoth змінює значення приватної властивості
+value екземпляра класу, який його викликає У результаті виклику new
+StringBuilder(".") значення приватної змінної builder — це об'єкт Об'єкт builder
+не містить публічну властивість value Перший виклик builder.getValue() одразу
+після ініціалізації екземпляра повертає рядок . Другий виклик builder.getValue()
+після виклику builder.padStart("^") повертає рядок ^. Третій виклик
+builder.getValue() після виклику builder.padEnd("^") повертає рядок ^.^
+Четвертий виклик builder.getValue() після виклику builder.padBoth("=") повертає
+рядок =^.^=
